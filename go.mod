@@ -1,3 +1,3 @@
-module github.com/CryptoLoM/SMCM.git
+module smcm
 
 go 1.22.2
