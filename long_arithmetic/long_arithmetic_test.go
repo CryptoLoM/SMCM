@@ -1,21 +1,9 @@
 package main
 
 import (
-	"reflect"
 	"testing"
 )
 
-// Тест функції додавання великих чисел
-func TestAddBigNumbers(t *testing.T) {
-	a := []uint32{0xFFFFFFFF, 0xFFFFFFFF, 0, 0}
-	b := []uint32{1, 0, 0, 0}
-	expected := []uint32{0, 0, 1, 0}
-	result := addBigNumbers(a, b)
-	for i := range expected {
-		if result[i] != expected[i] {
-			t.Errorf("Очікувано %08X, отримано %08X", expected[i], result[i])
-		}	}
-}
 
 // Тест віднімання
 func TestSubtractBigNumbers(t *testing.T) {

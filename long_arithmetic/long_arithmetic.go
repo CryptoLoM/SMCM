@@ -6,8 +6,6 @@ import (
 	"time"
 )
 
-// Максимальна кількість 32-бітних слів для числа
-var maxWords = 4
 
 // Додавання двох беззнакових великих чисел
 func addBigNumbers(a, b []uint32) []uint32 {
@@ -158,14 +156,6 @@ func toDecimal(number []uint32) string {
 	return strconv.FormatUint(decimal, 10)
 }
 
-// Перетворення числа у двійкову систему
-func toBinary(number []uint32) string {
-	binary := ""
-	for i := len(number) - 1; i >= 0; i-- {
-		binary += fmt.Sprintf("%032b", number[i])
-	}
-	return binary
-}
 
 // Перетворення числа у шістнадцяткову систему
 func toHex(number []uint32) string {
@@ -211,13 +201,7 @@ func measureRepeatedTime(repeats int, f func()) time.Duration {
 	return time.Since(start)
 }
 
-
-// Основна функція
 func main() {
-	// Вхідні числа
-	a := []uint32{0x12345678, 0x23456789, 0x34567890, 0x45678901}
-	b := []uint32{0x98765432, 0x87654321, 0x76543210, 0x6543210F}
-	c := []uint32{0x11111111, 0x22222222, 0x33333333, 0x44444444}
 
 
 	// Тести на тотожність
