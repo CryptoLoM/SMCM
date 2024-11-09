@@ -308,17 +308,17 @@ func TestBigNumbersEqual(t *testing.T) {
 
 
 func TestToHex(t *testing.T) {
-	// Define test cases with parsed numbers (as slices of uint32) and their expected hexadecimal string results.
+
 	tests := []struct {
-		input    []uint32 // Parsed input as a slice of uint32 numbers
-		expected string   // Expected result as a hexadecimal string
+		input    []uint32 
+		expected string   
 	}{
 		{parseHex("9ABCDEF012345678"), "9ABCDEF012345678"},
 		{parseHex("12345678"), "12345678"},
 		{parseHex("FFFFFFFF"), "FFFFFFFF"},
-		{parseHex("0"), "0"},                    // Test with zero
-		{parseHex("0000000000000000"), "0"},     // Test with leading zeros
-		{parseHex("100000000"), "100000000"},    // Test with a large power of two
+		{parseHex("0"), "0"},                    
+		{parseHex("0000000000000000"), "0"},     
+		{parseHex("100000000"), "100000000"},   
 	}
 
 	for _, test := range tests {
@@ -335,15 +335,15 @@ func TestToHex(t *testing.T) {
 
 func TestParseHex(t *testing.T) {
 	tests := []struct {
-		hexInput string   // Input hexadecimal string
-		expected []uint32 // Expected result as a slice of uint32 values
+		hexInput string   
+		expected []uint32 
 	}{
-		{"9ABCDEF012345678", []uint32{0x12345678, 0x9ABCDEF0}},    // Standard case with two uint32s
-		{"12345678", []uint32{0x12345678}},                        // Single uint32 value
-		{"FFFFFFFF", []uint32{0xFFFFFFFF}},                        // Maximum 32-bit unsigned integer
-		{"0", []uint32{0}},                                        // Zero case
-		{"0000000000000000", []uint32{0}},                         // Leading zeros
-		{"100000000", []uint32{0x0, 0x1}},                         // Large power of two spanning two uint32s
+		{"9ABCDEF012345678", []uint32{0x12345678, 0x9ABCDEF0}},    
+		{"12345678", []uint32{0x12345678}},                     
+		{"FFFFFFFF", []uint32{0xFFFFFFFF}},                        
+		{"0", []uint32{0}},                                        
+		{"0000000000000000", []uint32{0}},                       
+		{"100000000", []uint32{0x0, 0x1}},                         
 	}
 
 	for _, test := range tests {
