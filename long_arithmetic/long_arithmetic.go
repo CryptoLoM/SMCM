@@ -4,6 +4,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"errors"
 )
 
 
@@ -330,6 +331,20 @@ func measureRepeatedTime(repeats int, f func()) time.Duration {
 	return time.Since(start)
 }
 
+
+func multiplyByAddition(n int, a int) (int, error) {
+	// Перевіряємо обмеження на n
+	if n < 100 {
+		return 0, errors.New("помилка: n повинно бути не меншим за 100")
+	}
+
+	result := 0
+	for i := 0; i < n; i++ {
+		result += a
+	}
+	return result, nil
+}
+
 // Перевірка тотожності (a + b) ⋅ c = c ⋅ (a + b) = a ⋅ c + b ⋅ c 
 func testIdentity1(a, b, c []uint32) bool {
 	sum := addBigNumbers(a, b)
@@ -368,6 +383,16 @@ func main() {
 	h4 := parseHex(hexInput4)
 
     fmt.Println("Перевірка тотожностей:")
+
+	n := 100
+	a := 5
+	result, err := multiplyByAddition(n, a)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("Результат %d * %d = %d\n", n, a, result)
+	}
+
     fmt.Printf("(a + b) ⋅ c = c ⋅ (a + b) = a ⋅ c + b ⋅ c : %v\n", testIdentity1(h1, h2, h3))
 
     repeats := 10000
