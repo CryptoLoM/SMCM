@@ -410,7 +410,7 @@ func main() {
     for _, val := range h1 {
         str += fmt.Sprintf("%d", val)
     }
-    fmt.Println("h2 в нормальному виді:", str)
+    fmt.Println("h1 в нормальному виді:", str)
 
 	str = ""
     for _, val := range h2 {
@@ -422,13 +422,13 @@ func main() {
     for _, val := range h3 {
         str += fmt.Sprintf("%d", val)
     }
-    fmt.Println("h2 в нормальному виді:", str)
+    fmt.Println("h3 в нормальному виді:", str)
 
 	str = ""
     for _, val := range h4 {
         str += fmt.Sprintf("%d", val)
     }
-    fmt.Println("h2 в нормальному виді:", str)
+    fmt.Println("h4 в нормальному виді:", str)
 	
 
     fmt.Println("Перевірка тотожностей:")
