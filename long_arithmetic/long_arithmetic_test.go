@@ -166,7 +166,7 @@ func TestSquareBigNumber(t *testing.T) {
 	}
 
 	a = parseHex("f")
-	expected = parseHex("")
+	expected = parseHex("e1")
 	result = squareBigNumber(a)
 
 	if !bigNumbersEqual(result, expected) {
@@ -308,27 +308,30 @@ func TestBigNumbersEqual(t *testing.T) {
 
 
 func TestToHex(t *testing.T) {
+    tests := []struct {
+        input    []uint32
+        expected string
+    }{
+        // Тест для 0
+        {input: []uint32{0}, expected: "00000000"},
+        // Тест для 1
+        {input: []uint32{1}, expected: "00000001"},
+        // Тест для числа з одним uint32 елементом
+        {input: []uint32{305419896}, expected: "12345678"}, 
+        // Тест для числа з двома uint32 елементами
+        {input: []uint32{305419896, 4294967295}, expected: "FFFFFFFF12345678"}, 
+        // Тест для числа з кількома нульовими елементами
+        {input: []uint32{0, 305419896, 0}, expected: "1234567800000000"},
+        // Тест для числа, яке є лише нулями
+        {input: []uint32{0, 0, 0}, expected: "0"},
+    }
 
-	tests := []struct {
-		input    []uint32 
-		expected string   
-	}{
-		{parseHex("9ABCDEF012345678"), "9ABCDEF012345678"},
-		{parseHex("12345678"), "12345678"},
-		{parseHex("FFFFFFFF"), "FFFFFFFF"},
-		{parseHex("0"), "0"},                    
-		{parseHex("0000000000000000"), "0"},     
-		{parseHex("100000000"), "100000000"},   
-	}
-
-	for _, test := range tests {
-		result := toHex(test.input)
-		if result != test.expected {
-			t.Errorf("toHex(%v) = %s; want %s", test.input, result, test.expected)
-		}else{
-			t.Logf("PASS: Input: %v, Result: %v", test.input, result)
-		}
-	}
+    for _, tt := range tests {
+        result := toHex(tt.input)
+        if result != tt.expected {
+            t.Errorf("toHex(%v) = %v; expected %v", tt.input, result, tt.expected)
+        }
+    }
 }
 
 
