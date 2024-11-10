@@ -403,6 +403,34 @@ func main() {
 	h3 := parseHex(hexInput3)
 	h4 := parseHex(hexInput4)
 
+	fmt.Println("Числа в нормальному виді:")
+
+
+	str := ""
+    for _, val := range h1 {
+        str += fmt.Sprintf("%d", val)
+    }
+    fmt.Println("h2 в нормальному виді:", str)
+
+	str = ""
+    for _, val := range h2 {
+        str += fmt.Sprintf("%d", val)
+    }
+    fmt.Println("h2 в нормальному виді:", str)
+
+	str = ""
+    for _, val := range h3 {
+        str += fmt.Sprintf("%d", val)
+    }
+    fmt.Println("h2 в нормальному виді:", str)
+
+	str = ""
+    for _, val := range h4 {
+        str += fmt.Sprintf("%d", val)
+    }
+    fmt.Println("h2 в нормальному виді:", str)
+	
+
     fmt.Println("Перевірка тотожностей:")
 
 	n := 100
