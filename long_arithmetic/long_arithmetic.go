@@ -460,12 +460,12 @@ func main() {
 
     fmt.Printf("Число h2 у шістнадцятковій системі: %s\n", toHex(h2))
 
-	powerHexTime := measureRepeatedTime(1, func() { powerBigNumber(h1, h3) })
+	powerHexTime := measureRepeatedTime(repeats, func() { powerBigNumber(h1, h3) })
 	powerHexResult := powerBigNumber(h1, h3)
 	fmt.Printf("Піднесення hex до hex результат: %s\n", toHex(powerHexResult))
 	fmt.Printf("Час виконання (піднесення hex до hex): %v\n", powerHexTime)
 
-	divideTime := measureRepeatedTime(1, func() {
+	divideTime := measureRepeatedTime(repeats, func() {
      divideBigNumbers(h2, h4)})
     quotient := divideBigNumbers(h2, h4)
     fmt.Printf("Ділення результат : %s\n", toHex(quotient))
