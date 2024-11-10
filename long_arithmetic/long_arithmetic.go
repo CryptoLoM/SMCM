@@ -299,6 +299,14 @@ func powerBigNumber(base, exponent []uint32) []uint32 {
 
 
 func toHex(number []uint32) string {
+	if len(number) == 1 && number[0] == 0 {
+        return "00000000"
+    }
+
+    // Якщо число є 1, повертаємо "1"
+    if len(number) == 1 && number[0] == 1 {
+        return "00000001"
+    }
     hex := ""
     for i := len(number) - 1; i >= 0; i-- {
         hex += fmt.Sprintf("%08X", number[i])
@@ -314,6 +322,7 @@ func toHex(number []uint32) string {
 func parseHex(hexStr string) []uint32 {
 	hexStr = strings.TrimLeft(hexStr, "0x")
 	hexStr = strings.TrimLeft(hexStr, "0")
+	
 	if hexStr == "" {
 		return []uint32{0} 
 	}
@@ -377,12 +386,12 @@ func bigNumbersEqual(a, b []uint32) bool {
 }
 
 func main() {
-	
+
 	zeroNumber := zero()
 	oneNumber := one()
 
-	fmt.Printf("Zero as a big number: %s\n", toHex(zeroNumber))
-	fmt.Printf("One as a big number: %s\n", toHex(oneNumber))
+	fmt.Printf("конвертування 0: %s\n", toHex(zeroNumber))
+	fmt.Printf("конвертування 1: %s\n", toHex(oneNumber))
 
     hexInput1 := "2"	
     hexInput2 := "e6f2c4a8d3b7c9e1f5b4a2d6e9c8f3a7b5d1c8e2f4a9d6b7c3e1f5b8a6d4c9e7b3f2a5c1d9b6f4e8a7c5b2d1f3e9b4a6c7d2f1b5e3c8a9d7f2b4e6c1a3d8b9f5c7e2a4b3f1d6c8e5b2a7f9b3c6e1d4f8a5c9e2b7d1f3a649e8fbc709682fd27b5374521000a9f7a84c1e31156eaf661db2cef3e738e9a05ed540487a805dd5098d19b5dd1eed610cff655279e2be39fb520c7713eb41258886210005a46e6de9311231b85da6d4f32c028847aa64bc04458861be442512db2056bae4a1d44d10d7013ddb5f8dcab1cc17f535d080974a219d4b0177fbf9"
