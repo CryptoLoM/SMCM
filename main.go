@@ -24,13 +24,11 @@ func main() {
     g := long_arithmetic.ParseHex("1000")
 	h := long_arithmetic.ParseHex("3") 
 
-
 	
 	fmt.Printf("a в hex: %s\n", a.ToHex())
 	fmt.Printf("\n")
 	fmt.Printf("b в hex: %s\n", b.ToHex())
 	fmt.Printf("\n")
-
 
 	sum := a.Add(b)
 	AddTime := measureRepeatedTime(repeats, func() { a.Add(b) })
@@ -62,7 +60,6 @@ func main() {
 	fmt.Printf("Час виконання : %v\n", SquareTime)
     fmt.Printf("\n")
 
-
 	exp := g.Power(h)
 	ExpTime := measureRepeatedTime(repeats, func() { g.Power(h) })
 	fmt.Printf("Піднесення багаторозрядного числа до степеня: e ^ d = %s\n", exp.ToHex())
@@ -82,14 +79,12 @@ func main() {
 	fmt.Printf("Час виконання : %v\n", RightTime)
 	fmt.Printf("\n")
 
-	// Найбільший спільний дільник (НСД)
     gcd := a.GCD(b)
     GCDTime := measureRepeatedTime(1, func() { a.GCD(b) })
     fmt.Printf("GCD(a, b) = %s\n", gcd.ToHex())
     fmt.Printf("Час виконання : %v\n", GCDTime)
     fmt.Printf("\n")
 
-    // Найменше спільне кратне (НСК)
     lcm := a.LCM(b)
     LCMTime := measureRepeatedTime(1, func() { a.LCM(b) })
     fmt.Printf("НСК: LCM(a, b) = %s\n", lcm.ToHex())
@@ -102,20 +97,17 @@ func main() {
     fmt.Printf("Час виконання : %v\n", ModAddTime)
     fmt.Printf("\n")
 
-    // Віднімання за модулем
     modDiff := a.ModSubtract(b, c) 
     ModSubtractTime := measureRepeatedTime(1, func() { a.ModSubtract(b, c) })
     fmt.Printf("Віднімання за модулем: (a - b) mod n = %s\n", modDiff.ToHex())
     fmt.Printf("Час виконання : %v\n", ModSubtractTime)
     fmt.Printf("\n")
 
-    // Множення за модулем
     modProduct := a.ModMultiply(b, c) 
     ModMultiplyTime := measureRepeatedTime(1, func() { a.ModMultiply(b, c) })
     fmt.Printf("Множення за модулем: (a * b) mod n = %s\n", modProduct.ToHex())
     fmt.Printf("Час виконання : %v\n", ModMultiplyTime)
     fmt.Printf("\n")
-
 
 	ModSquareTime := measureRepeatedTime(1, func() { a.ModSquare(c) })
     modsquare := a.ModSquare(c)
@@ -135,6 +127,4 @@ func main() {
     fmt.Printf("Піднесення до степеня за модулем (редукція Баррета): (a^exp) mod n = %s\n", power.ToHex())
     fmt.Printf("Час виконання: %v\n", BarrettExpTime)
     fmt.Printf("\n")
-
 }
-
