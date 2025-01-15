@@ -18,11 +18,12 @@ func main() {
 	fmt.Printf("\n")
 	repeats := 1000
 
-	a := long_arithmetic.ParseHex("fed11a84df48288672aed240ccecd3eb9b0748135c8047a1900b66552efd4a958e1061959b3a5e7f487957513e4d067eb38c15db62ade93d3c273ef4bff5d2c9f77e477848ade9bf4ce0237ccc134bc8b924bd0345e8ebee82a9626a2b7d8bb875aee46b30f28361704becc061ad818229ef2411010fa12ab69db488846159c3072bcac4509a29b52e6e9627b93ea3f3ac8c1102dd0c0dda21d12c99dc094d0a0549edaae03b0e5eeef4a0d24d7e457c336ec01ec00362cf4d99e57e261cf1978f13052f4d2d67a827a728652c6892b2295c3752cf70fd75171000ffef654a6e507434baa613e0089237a7a87d60f70f7f93adb4ad3b3d565971a3c4025a7cd0")
+	a := long_arithmetic.ParseHex("cef48dbb53b8bea5f89905703f7f9441be4abae58aab3f9eb4e8f559bdeadcd365d888e9f7c90f9f4be023818bcb71fddd800b26db081b0524c2aa09676bce6e5cb1753b6b14f3afb66063af006f6ee9f300a789be4382e216606407c14644c526e1169e3b497fae02364374538f7d94408bbc6ee98c830f10cc97af3dbd4f1ff5df67a0aead5ac2b76eb8d56b6256e8f36d5f0e0e06f6ac6c7930074f725ad0b0ec7a9c533ee87a74d10836600ce8c8ea290a400778b5de7e854f3935b3494db98b617251db5cb698e95dcfeb5c93d6454101fe440c4d5902bd88833a65827958e3c411766137685b0b8b98453fa63fb48d49ecbb6f0d9cafa999f844341d6b")
 	b := long_arithmetic.ParseHex("7762eca0d63bf84694ff81b0ef356bd89760377107b18ec7d116dba9ec8771fe363dcc04dfca3a735a90ecd641c883fa7b72e1aaeb5aab15a35d5b5b4e5ef24050dc43a8c1a8133d70c45ce9ca40c03b71fd0cd90faa508968e05cccd0cc7ad1fea6b891cb65954851f6ad61e001623ab53336e082c7670b056a65017caff175f44a7658f34d6daf76dc26095a857f0d694b3e945c001894ebb2f78f9021d24fda50b10e2ca006bfc5e48d8893f363766f8af250f85cc6f676dbedd04e1c186668e15bc9bcf77da752c0f795d2afa3c140dd0ee996255ecc5f3443945b10fa519d77860f995f3dac92787ee243aa9f93b7c35eabca713481275d851353d99f88")
-	c := long_arithmetic.ParseHex("d3a518e47135c29e70e5295c2e14e4dd0e1e9329c6788b6422b3e9b2e933e8f480fa9ebac93f72eea89b659ce5e1dee1d1626ef0d17449edf87f2d647720fd47cb811c1087ab4d4374d6e7883a46b4e1c49aa05b44863d43c66d63e2d9160ed3dbec0e1e27d8d9e3b69a65d39eeb0675e45e3e67a45d503eab92bcbc7f64f671")
-	d := long_arithmetic.ParseHex("100")
-	e := long_arithmetic.ParseHex("d1f")
+	c := long_arithmetic.ParseHex("c6dfa643d0298ec57474768f363e65fa456d331cae5dc9cf9f2ee1f49aa9b479786312ad63bd7a377deac26acd94686d2e50629e5936a4b122826779ab4ada6f9b8da264eb9173e6744bf3ef387a496b70811873f7a1c735a28d10d89be7917672b77476dc1f9b9981a9022bc5a511f80941c7a72e78211e2b2fb5da07d7a557c6dfa643d0298ec57474768f363e65fa456d331cae5dc9cf9f2ee1f49aa9b479786312ad63bd7a377deac26acd94686d2e50629e5936a4b122826779ab4ada6f9b8da264eb9173e6744bf3ef387a496b70811873f7a1c735a28d10d89be7917672b77476dc1f9b9981a9022bc5a511f80941c7a72e78211e2b2fb5da07d7a557")
+    g := long_arithmetic.ParseHex("1000")
+	h := long_arithmetic.ParseHex("3") 
+
 
 	
 	fmt.Printf("a в hex: %s\n", a.ToHex())
@@ -62,8 +63,8 @@ func main() {
     fmt.Printf("\n")
 
 
-	exp := e.Power(d)
-	ExpTime := measureRepeatedTime(repeats, func() { e.Power(d) })
+	exp := g.Power(h)
+	ExpTime := measureRepeatedTime(repeats, func() { g.Power(h) })
 	fmt.Printf("Піднесення багаторозрядного числа до степеня: e ^ d = %s\n", exp.ToHex())
 	fmt.Printf("Час виконання : %v\n", ExpTime)
     fmt.Printf("\n")
@@ -80,6 +81,20 @@ func main() {
 	fmt.Printf("Зсув вправо = %s\n", right.ToHex())
 	fmt.Printf("Час виконання : %v\n", RightTime)
 	fmt.Printf("\n")
+
+	// Найбільший спільний дільник (НСД)
+    gcd := a.GCD(b)
+    GCDTime := measureRepeatedTime(1, func() { a.GCD(b) })
+    fmt.Printf("GCD(a, b) = %s\n", gcd.ToHex())
+    fmt.Printf("Час виконання : %v\n", GCDTime)
+    fmt.Printf("\n")
+
+    // Найменше спільне кратне (НСК)
+    lcm := a.LCM(b)
+    LCMTime := measureRepeatedTime(1, func() { a.LCM(b) })
+    fmt.Printf("НСК: LCM(a, b) = %s\n", lcm.ToHex())
+    fmt.Printf("Час виконання : %v\n", LCMTime)
+    fmt.Printf("\n")
 
 	modSum := a.ModAdd(b, c) 
     ModAddTime := measureRepeatedTime(1, func() { a.ModAdd(b, c) })
@@ -101,19 +116,6 @@ func main() {
     fmt.Printf("Час виконання : %v\n", ModMultiplyTime)
     fmt.Printf("\n")
 
-    // Найбільший спільний дільник (НСД)
-    gcd := a.GCD(b)
-    GCDTime := measureRepeatedTime(1, func() { a.GCD(b) })
-    fmt.Printf("GCD(a, b) = %s\n", gcd.ToHex())
-    fmt.Printf("Час виконання : %v\n", GCDTime)
-    fmt.Printf("\n")
-
-    // Найменше спільне кратне (НСК)
-    lcm := a.LCM(b)
-    LCMTime := measureRepeatedTime(1, func() { a.LCM(b) })
-    fmt.Printf("НСК: LCM(a, b) = %s\n", lcm.ToHex())
-    fmt.Printf("Час виконання : %v\n", LCMTime)
-    fmt.Printf("\n")
 
 	ModSquareTime := measureRepeatedTime(1, func() { a.ModSquare(c) })
     modsquare := a.ModSquare(c)
@@ -121,11 +123,18 @@ func main() {
     fmt.Printf("Час виконання : %v\n", ModSquareTime)
     fmt.Printf("\n")
 
+	ln := new(long_arithmetic.BigInt)
+    KaratsubaTime := measureRepeatedTime(1, func() { ln.KaratsubaMultiply(a,b) })
+	mult := ln.KaratsubaMultiply(a,b)
+	fmt.Printf("Множення за Карацубою: (a * b) = %s\n", mult.ToHex())
+	fmt.Printf("Час виконання: %v\n", KaratsubaTime)
+	fmt.Printf("\n")
 
-    BarrettExpTime := measureRepeatedTime(1, func() { e.LongModPowerBarrett(d, c) })
-    power := e.LongModPowerBarrett(d, c)
+    BarrettExpTime := measureRepeatedTime(1, func() { a.LongModPowerBarrett(b, c) })
+    power := a.LongModPowerBarrett(b, c)
     fmt.Printf("Піднесення до степеня за модулем (редукція Баррета): (a^exp) mod n = %s\n", power.ToHex())
-    fmt.Printf("Час виконання : %v\n", BarrettExpTime)
+    fmt.Printf("Час виконання: %v\n", BarrettExpTime)
     fmt.Printf("\n")
+
 }
 

@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-const numLen = 128
+const numLen = 256
 type BigInt struct {
 	numberArray [numLen]uint32
 	errorFlag   bool // Позначка, якщо сталося помилка
@@ -169,35 +169,45 @@ func (ln *BigInt) Multiply(b *BigInt) *BigInt {
     return result
 }
 
-func (ln *BigInt) LongShiftDigitsToHigh(shift int) *BigInt {
-    result := NewBigInt()
-
-    if shift >= numLen {
-        return result // Якщо зсув більше довжини числа, повертаємо 0
-    }
-
-    for i := 0; i < numLen - shift; i++ {
-        result.numberArray[i + shift] = ln.numberArray[i]
-    }
-
-    return result
-}
-
 func (ln *BigInt) LongShiftDigitsToLow(shift int) *BigInt {
     result := NewBigInt()
 
-    // Якщо зсув більше або рівний довжині числа, повертаємо 0
-    if shift >= len(ln.numberArray) {
-        return result
+	if shift >= len(ln.numberArray) {
+		return NewBigInt() // Повертаємо 0, якщо зсув перевищує довжину
+	}
+
+    for i := 0; i < numLen - shift; i++ { 
+        result.numberArray[i] = ln.numberArray[i + shift] 
+	}
+	
+	
+   
+
+    return result
+	
+}
+
+func (ln *BigInt) LongShiftDigitsToHigh(shift int) *BigInt {
+    if shift < 0 {
+        panic("Shift value cannot be negative")
     }
 
-    // Переміщаємо елементи вправо, заповнюючи нулями зліва
+    // Якщо зсув перевищує довжину масиву, повертаємо 0
+    if shift >= numLen {
+        return NewBigInt()
+    }
+
+    result := NewBigInt()
+
+    // Копіюємо дані з відповідним зсувом
     for i := len(ln.numberArray) - 1; i >= shift; i-- {
-        result.numberArray[i-shift] = ln.numberArray[i]
+        result.numberArray[i] = ln.numberArray[i-shift]
     }
 
     return result
 }
+
+
 
 
 // Ділення з цілою частиною
@@ -344,7 +354,49 @@ func (ln *BigInt) BitAt(i int) uint32 {
 	block := i / 32                // Номер 32-бітного блоку 
 	bit := i % 32               // Зсув у блоці 
 	return (ln.numberArray[block] >> bit) & 1 // Зсув і перевірка 
-
-
 	
    }
+
+// IsEven перевіряє, чи є число парним
+func (ln *BigInt) IsEven() bool {
+    return ln.numberArray[0]&1 == 0
+}
+
+
+// GCD обчислює найбільший спільний дільник (НСД) двох чисел
+func (ln *BigInt) GCD(other *BigInt) *BigInt {
+    a := ln.Copy()
+    b := other.Copy()
+    d := NewBigIntFromUint32(1)
+
+    for a.IsEven() && b.IsEven() {
+        a = a.RightShift(1)
+        b = b.RightShift(1)
+        d = d.ShiftLeft(1)
+    }
+
+    for a.IsEven() {
+        a = a.RightShift(1)
+    }
+
+    for !b.IsZero() {
+        for b.IsEven() {
+            b = b.RightShift(1)
+        }
+
+        if a.Compare(b) > 0 {
+            a, b = b, a
+        }
+        b = b.Subtract(a)
+    }
+
+    return a.Multiply(d)
+}
+
+// LCM обчислює найменше спільне кратне двох чисел через їхній НСД
+func (ln *BigInt) LCM(other *BigInt) *BigInt {
+  
+    gcd := ln.GCD(other)
+    product := ln.Multiply(other)
+    return product.Divide(gcd)
+}
