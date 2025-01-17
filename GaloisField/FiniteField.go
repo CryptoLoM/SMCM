@@ -65,7 +65,7 @@ func (a *FieldElement) Add(b *FieldElement) *FieldElement {
 	return result
 }
 
-// Операція піднесення до квадрату (циклічний зсув вправо)
+
 func (a *FieldElement) Square() *FieldElement {
 	var tempResult [ARRAY_SIZE * 2]uint64
 
@@ -79,7 +79,7 @@ func (a *FieldElement) Square() *FieldElement {
 }
 
 
-// Операція множення через матрицю Λ
+
 func (a *FieldElement) Mul(b *FieldElement) *FieldElement {
 	var result [ARRAY_SIZE * 2]uint64
 	for i := 0; i < FIELD_SIZE; i++ {
@@ -231,31 +231,24 @@ func CheckCommutativityMultiplication(a, b *FieldElement) bool {
 
 
 func TestFieldProperties() {
-	// Create some field elements for testing
+	
 	a := NewFieldElementFromString("01000110101101011100100100011111110001000111010111101110011101110111001011011101001010101100000111011001111101100000001001100001110001100110000111010010110001101100100001011001100110110010000")
 	b := NewFieldElementFromString("01000001011001110010111010111100110000100111010010000011110001001011100011011110001101101000010011001001101100000110000100100010001011110010101001010110001101110001010000010110100001111111000")
 	c := NewFieldElementFromString("11011111111010000111101011101010101001101001000101000111111010111011000001110101100111100011110111111101010000001011110100101000001100001111011110001000001100100010111110000101010010000010110")
 
 
-	// Check Additive Identity
 	fmt.Println("Check Additive Identity:", CheckAdditiveIdentity(a))
 
-	// Check Multiplicative Identity
 	fmt.Println("Check Multiplicative Identity:", CheckMultiplicativeIdentity(a))
 
-	// Check Distributivity
 	fmt.Println("Check Distributivity:", CheckDistributivity(a, b, c))
 
-	// Check Associativity of Addition
 	fmt.Println("Check Associativity of Addition:", CheckAssociativityAddition(a, b, c))
 
-	// Check Associativity of Multiplication
 	fmt.Println("Check Associativity of Multiplication:", CheckAssociativityMultiplication(a, b, c))
 
-	// Check Commutativity of Addition
 	fmt.Println("Check Commutativity of Addition:", CheckCommutativityAddition(a, b))
 
-	// Check Commutativity of Multiplication
 	fmt.Println("Check Commutativity of Multiplication:", CheckCommutativityMultiplication(a, b))
 
 }
