@@ -445,10 +445,6 @@ func main() {
 	b := NewFieldElementFromBinary("11000010110101010011100111111011011101000101001101010110001100001110111100000010111110101001001101100001010101001110001111011010000010110000000110000101100111100011100001101011101")
 	n := NewFieldElementFromBinary("11000010110101010011100111111011011101000101001101010110001100001110111100000010111110101001001101100001010101001110001111011010000010110000000110000101100111100011100001101011101")
 
-	fmt.Println("a:", ConvertToBinary(a))
-	fmt.Println("b:", ConvertToBinary(b))
-	fmt.Println("n:", ConvertToBinary(n))
-
 	fmt.Println("Тестування роботи ваги:")
 	TestWeightAndPopCount()
 
@@ -463,6 +459,10 @@ func main() {
 
     fmt.Println("\nТестування дистрибутивності:")
     TestDistributivity()
+
+	fmt.Println("a:", ConvertToBinary(a))
+	fmt.Println("b:", ConvertToBinary(b))
+	fmt.Println("n:", ConvertToBinary(n))
 
 	fmt.Println("a + b:", ConvertToBinary(a.Add(b)))
 	fmt.Println("a * b:", ConvertToBinary(a.Mul(b)))
